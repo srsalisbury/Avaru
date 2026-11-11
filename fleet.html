@@ -55,6 +55,30 @@ article[style*="solid"]:hover{border-color:rgba(81,255,201,.45)!important}
 .av-photo:not([style*="border-bottom"]):not([style*="border-top"])::after{border-bottom:1px solid #262948}
 .av-photo::before{z-index:-2;background:var(--img) var(--pos,50% 50%)/cover no-repeat;filter:saturate(.8)}
 .av-photo::after{z-index:-1;background:radial-gradient(ellipse 85% 90% at 50% 50%,rgba(20,21,42,var(--tint,.62)),rgba(20,21,42,.93) 100%)}
+.av-shot::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(135deg,rgba(81,255,201,.2),rgba(81,255,201,0) 45%,rgba(188,119,255,0) 55%,rgba(188,119,255,.2));opacity:0;transition:opacity .45s ease}
+.av-shot::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 60px rgba(12,13,29,.55);transition:opacity .45s ease}
+.av-ship>summary:hover .av-shot::before,.av-shot:hover::before{opacity:1}
+.av-ship>summary:hover .av-shot::after,.av-shot:hover::after{opacity:.35}
+.av-ships{display:flex;flex-direction:column;gap:20px}
+.av-ship{border:1px solid #262948;border-radius:4px;background:rgba(20,21,42,.7);overflow:hidden;transition:border-color .25s ease}
+.av-ship.av-classified{border-style:dashed;border-color:#3A3D63}
+.av-ship:hover,.av-ship[open]{border-color:rgba(81,255,201,.45)}
+.av-ship>summary{display:block;list-style:none;cursor:pointer}
+.av-ship>summary::-webkit-details-marker{display:none}
+.av-ship>summary:focus-visible{outline:2px solid #51FFC9;outline-offset:-2px}
+.av-ship-img{position:relative;height:clamp(150px,18vw,230px);overflow:hidden;border-bottom:1px solid #262948;transition:height .5s cubic-bezier(.2,.7,.2,1)}
+.av-classified .av-ship-img{border-bottom-style:dashed;border-bottom-color:#3A3D63}
+.av-ship[open] .av-ship-img{height:clamp(220px,40vw,500px)}
+.av-ship-img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:44% 56%}
+.av-ship-head{display:flex;align-items:center;gap:20px;padding:22px 28px}
+.av-ship-titles{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px}
+.av-ship-toggle{flex:0 0 auto;display:grid;place-items:center;width:28px;height:28px;color:#6E7299;transition:transform .3s ease,color .3s ease}
+.av-ship>summary:hover .av-ship-toggle{color:#B8BBD6}
+.av-ship[open] .av-ship-toggle{transform:rotate(180deg);color:#51FFC9}
+.av-ship-body{padding:0 28px 32px;display:flex;flex-wrap:wrap;align-items:flex-start;gap:28px 48px;animation:av-ship-open .45s cubic-bezier(.2,.7,.2,1)}
+.av-ship-gallery{flex:1 1 100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+@keyframes av-ship-open{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@media (max-width:720px){.av-ship-head{padding:18px 20px}.av-ship-body{padding:0 20px 24px}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 @keyframes av-rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 .av-reveal{opacity:0}
@@ -87,36 +111,40 @@ a[aria-label="Avaru Racing home"]:active img{transform:scale(.98)}
 
 <section aria-label="All ships" style="max-width: 1280px; margin: 0 auto; padding: 0 calc(40px * var(--k)) calc(112px * var(--k))">
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-bottom: 24px; border-bottom: 1px solid #262948; margin-bottom: 32px">
-<p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8B8FB5">All ships · 2</p>
-<p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8B8FB5">Newest first ↓</p>
+<p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8B8FB5">All ships · 3</p>
+<p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8B8FB5">Oldest first ↓</p>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px">
-<article style="border: 1px dashed #3A3D63; border-radius: 4px; overflow: hidden; display: flex; flex-direction: column">
-<div style="position: relative; aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; border-bottom: 1px dashed #3A3D63; background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0 10px, transparent 10px 20px)"><svg width="64%" viewBox="0 0 320 120" fill="none" aria-hidden="true" style="filter: blur(4px); opacity: 0.5"><path d="M14 66L84 46L176 40L250 50L306 62L250 76L176 84L84 80Z" fill="#2A2D52"/><path d="M140 44L186 22L226 48M140 82L186 100L226 74" stroke="#3A3D63" stroke-width="6" stroke-linecap="round"/></svg><span style="position: absolute; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; letter-spacing: 0.4em; color: #ECEDF7; border: 1px solid #ECEDF7; padding: 8px 14px; transform: rotate(-6deg)">Classified</span></div>
-<div style="padding: 28px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1">
-<p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #BC77FF">Atmospheric Sprinter · Our first ship</p>
-<h3 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: calc(52px * var(--fs)); line-height: 1; letter-spacing: 0.04em; color: #FFFFFF"><span role="img" aria-label="Classified" title="Classified" style="display: inline-block; width: 2.6em; height: 0.8em; vertical-align: -0.02em; background: #ECEDF7; border-radius: 1px"></span></h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B8BBD6">The ship that put Avaru on the grid. Its name, specs and photos are still under wraps.</p>
-<p style="margin: 0; padding-top: 8px; font-size: 14px; color: #8B8FB5">Specs classified</p>
-<p style="margin: auto 0 0; padding-top: 12px; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #51FFC9">Reveal coming soon</p>
+<div class="av-ships">
+<details class="av-ship" id="aeres" name="fleet">
+<summary>
+<div class="av-ship-img av-shot"><img src="assets/aeres-hero.jpg" alt="The Aeres racing through a gate past a canyon wall" loading="lazy"></div>
+<div class="av-ship-head"><div class="av-ship-titles"><p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #BC77FF">Where it began</p><h3 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: calc(40px * var(--fs)); line-height: 1; letter-spacing: 0.04em; color: #FFFFFF">AERES</h3><p style="margin: 0; font-size: 16px; line-height: 1.6; color: #B8BBD6">Our first ship, built by the team that became Avaru.</p></div><span class="av-ship-toggle" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+</summary>
+<div class="av-ship-body">
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #B8BBD6; flex: 1 1 420px; max-width: 640px; font-size: 17px; line-height: 1.7">Paradox Design and Uncle Andy Industries built the Aeres to race, and every choice on it came down to speed. The engineers who worked on it got hooked. When the project ended, twenty-odd of them quit their jobs so they could keep building race ships. That became Avaru.</p>
+<dl style="flex: 1 1 360px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: #262948; border: 1px solid #262948; align-self: start"><div style="background: #14152A; padding: 18px 20px"><dt style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8B8FB5">Class</dt><dd style="margin: 8px 0 0; font-size: 17px">Light Atmo Smuggler</dd></div><div style="background: #14152A; padding: 18px 20px"><dt style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8B8FB5">Mass</dt><dd style="margin: 8px 0 0; font-size: 17px">30,000 kg</dd></div><div style="background: #14152A; padding: 18px 20px"><dt style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8B8FB5">Built by</dt><dd style="margin: 8px 0 0; font-size: 17px">Paradox × UAI</dd></div></dl>
+<div class="av-ship-gallery"><div class="av-shot" style="position: relative; aspect-ratio: 16 / 9; border: 1px solid #262948; border-radius: 4px; overflow: hidden"><img src="assets/ships/aeres-front.jpg" alt="The Aeres from the front, above a planet" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></div><div class="av-shot" style="position: relative; aspect-ratio: 16 / 9; border: 1px solid #262948; border-radius: 4px; overflow: hidden"><img src="assets/ships/aeres-side.jpg" alt="The Aeres in profile" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></div><div class="av-shot" style="position: relative; aspect-ratio: 16 / 9; border: 1px solid #262948; border-radius: 4px; overflow: hidden"><img src="assets/ships/aeres-back.jpg" alt="The Aeres from behind, engines lit" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></div></div>
+<a href="story.html" style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase">Read the story →</a>
 </div>
-</article>
-<article style="border: 1px dashed #3A3D63; border-radius: 4px; overflow: hidden; display: flex; flex-direction: column">
-<div style="position: relative; aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; border-bottom: 1px dashed #3A3D63; background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0 10px, transparent 10px 20px)"><svg width="70%" viewBox="0 0 320 120" fill="none" aria-hidden="true" style="filter: blur(3px); opacity: 0.55"><path d="M8 74L96 50L190 44L262 30L312 58L262 82L190 78L96 86Z" fill="#2A2D52"/><path d="M120 50L170 18L210 44M120 84L170 104L210 78" stroke="#3A3D63" stroke-width="6" stroke-linecap="round"/></svg><span style="position: absolute; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; letter-spacing: 0.4em; color: #ECEDF7; border: 1px solid #ECEDF7; padding: 8px 14px; transform: rotate(-6deg)">Classified</span></div>
-<div style="padding: 28px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1">
-<p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #BC77FF">Next ship · [CLASS]</p>
-<h3 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: calc(52px * var(--fs)); line-height: 1; letter-spacing: 0.04em; color: #6E7299">???</h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B8BBD6">On the drawing board now. Everything the <span role="img" aria-label="Classified" title="Classified" style="display: inline-block; width: 2.6em; height: 0.8em; vertical-align: -0.02em; background: #ECEDF7; border-radius: 1px"></span> taught us, in a new hull. Our original dream made real.</p>
-<ol aria-label="Next ship progress" style="list-style: none; margin: 8px 0 0; padding: 16px 0 0; border-top: 1px solid #262948; display: flex; flex-direction: column; gap: 12px"><li style="display: flex; align-items: center; gap: 12px; font-size: 14px; color: #ECEDF7"><span style="width: 12px; height: 12px; border-radius: 50%; background: #51FFC9; flex: 0 0 auto"></span><span style="flex: 1 1 auto">Concept</span><span style="font-size: 12px; color: #8B8FB5">Done</span></li><li style="display: flex; align-items: center; gap: 12px; font-size: 14px; color: #ECEDF7"><span style="width: 12px; height: 12px; border-radius: 50%; border: 2px solid #BC77FF; box-sizing: border-box; box-shadow: 0 0 0 4px rgba(188, 119, 255, 0.2); flex: 0 0 auto"></span><span style="flex: 1 1 auto">Design</span><span style="font-size: 12px; color: #8B8FB5">In progress</span></li><li style="display: flex; align-items: center; gap: 12px; font-size: 14px; color: #6E7299"><span style="width: 12px; height: 12px; border-radius: 50%; border: 1px solid #3A3D63; box-sizing: border-box; flex: 0 0 auto"></span><span style="flex: 1 1 auto">Build</span><span style="font-size: 12px; color: #8B8FB5"></span></li><li style="display: flex; align-items: center; gap: 12px; font-size: 14px; color: #6E7299"><span style="width: 12px; height: 12px; border-radius: 50%; border: 1px solid #3A3D63; box-sizing: border-box; flex: 0 0 auto"></span><span style="flex: 1 1 auto">Testing</span><span style="font-size: 12px; color: #8B8FB5"></span></li><li style="display: flex; align-items: center; gap: 12px; font-size: 14px; color: #6E7299"><span style="width: 12px; height: 12px; border-radius: 50%; border: 1px solid #3A3D63; box-sizing: border-box; flex: 0 0 auto"></span><span style="flex: 1 1 auto">Race debut</span><span style="font-size: 12px; color: #8B8FB5">[SEASON]</span></li></ol>
-<a href="coming-soon.html#discord" title="Coming soon" style="margin-top: auto; padding-top: 12px; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase">Follow development →</a>
+</details>
+<details class="av-ship av-classified" id="first-official" name="fleet">
+<summary>
+<div class="av-ship-img" style="background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0 10px, transparent 10px 20px); display: flex; align-items: center; justify-content: center"><svg width="64%" viewBox="0 0 320 120" fill="none" aria-hidden="true" style="filter: blur(4px); opacity: 0.5"><path d="M14 66L84 46L176 40L250 50L306 62L250 76L176 84L84 80Z" fill="#2A2D52"/><path d="M140 44L186 22L226 48M140 82L186 100L226 74" stroke="#3A3D63" stroke-width="6" stroke-linecap="round"/></svg><span style="position: absolute; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; letter-spacing: 0.4em; color: #ECEDF7; border: 1px solid #ECEDF7; padding: 8px 14px; transform: rotate(-6deg)">Classified</span></div>
+<div class="av-ship-head"><div class="av-ship-titles"><p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #BC77FF">Atmospheric Sprinter · Our first official ship</p><h3 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: calc(40px * var(--fs)); line-height: 1; letter-spacing: 0.04em; color: #FFFFFF"><span role="img" aria-label="Classified" title="Classified" style="display: inline-block; width: 2.6em; height: 0.8em; vertical-align: -0.02em; background: #ECEDF7; border-radius: 1px"></span></h3><p style="margin: 0; font-size: 16px; line-height: 1.6; color: #B8BBD6">Reveal coming soon</p></div><span class="av-ship-toggle" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+</summary>
+<div class="av-ship-body">
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #B8BBD6; max-width: 640px; font-size: 17px; line-height: 1.7">The ship that put Avaru on the grid. Its name, specs and photos are still under wraps.</p>
 </div>
-</article>
-<article style="border: 1px solid #262948; border-radius: 4px; background: linear-gradient(135deg, rgba(81, 255, 201, 0.08), rgba(188, 119, 255, 0.08)); padding: 28px; display: flex; flex-direction: column; justify-content: end; gap: 12px; min-height: 280px">
-<p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #51FFC9">Build with us</p>
-<h3 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: 24px; line-height: 1.3">The next ship could carry your name.</h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B8BBD6">We contract shipbuilders and credit them on every blueprint. We aren't taking applications right now.</p>
-<a href="join.html" style="padding-top: 8px; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase">Learn more →</a>
-</article>
+</details>
+<details class="av-ship av-classified" id="next-ship" name="fleet">
+<summary>
+<div class="av-ship-img" style="background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0 10px, transparent 10px 20px); display: flex; align-items: center; justify-content: center"><svg width="70%" viewBox="0 0 320 120" fill="none" aria-hidden="true" style="filter: blur(3px); opacity: 0.55"><path d="M8 74L96 50L190 44L262 30L312 58L262 82L190 78L96 86Z" fill="#2A2D52"/><path d="M120 50L170 18L210 44M120 84L170 104L210 78" stroke="#3A3D63" stroke-width="6" stroke-linecap="round"/></svg><span style="position: absolute; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; letter-spacing: 0.4em; color: #ECEDF7; border: 1px solid #ECEDF7; padding: 8px 14px; transform: rotate(-6deg)">Classified</span></div>
+<div class="av-ship-head"><div class="av-ship-titles"><p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #BC77FF">Next ship</p><h3 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: calc(40px * var(--fs)); line-height: 1; letter-spacing: 0.04em; color: #6E7299">???</h3><p style="margin: 0; font-size: 16px; line-height: 1.6; color: #B8BBD6">On the drawing board now.</p></div><span class="av-ship-toggle" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+</summary>
+<div class="av-ship-body">
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #B8BBD6; max-width: 640px; font-size: 17px; line-height: 1.7">Early design work is under way. More when there's something to show.</p>
+</div>
+</details>
 </div>
 </section>
 
@@ -181,6 +209,22 @@ a[aria-label="Avaru Racing home"]:active img{transform:scale(.98)}
   b.addEventListener('click', function () { set(!h.classList.contains('av-open')); });
   h.querySelectorAll('nav a').forEach(function (a) { a.addEventListener('click', function () { set(false); }); });
   window.addEventListener('resize', function () { if (window.innerWidth > 720) set(false); });
+})();
+</script>
+<script>
+(function () {
+  var ships = [].slice.call(document.querySelectorAll('.av-ship'));
+  ships.forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (d.open) ships.forEach(function (o) { if (o !== d && o.open) o.open = false; });
+    });
+  });
+  function fromHash() {
+    var t = location.hash && document.getElementById(location.hash.slice(1));
+    if (t && t.classList.contains('av-ship')) t.open = true;
+  }
+  fromHash();
+  window.addEventListener('hashchange', fromHash);
 })();
 </script>
 </body>

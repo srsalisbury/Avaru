@@ -6,7 +6,7 @@ Static site for Avaru Racing. No build step: every page is plain HTML with its s
 | File | Page |
 |---|---|
 | `index.html` | Home |
-| `fleet.html` | Fleet |
+| `fleet.html` | Fleet: every ship is an expandable entry here (copy the Aeres entry for a new ship) |
 | `story.html` | Our story |
 | `races.html` | Races |
 | `partners.html` | Partners |
