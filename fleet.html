@@ -13,7 +13,7 @@ body{margin:0;background:#14152A}
 a{color:#51FFC9}a:hover{color:#D9B5FF}
 @property --sy{syntax:"<number>";inherits:true;initial-value:0}
 .av-bg{--sy:0;background-image:radial-gradient(1600px 340px at calc(18% + var(--sy) * 100px) calc(2% + var(--sy) * 200px),rgba(188,119,255,0.1),transparent 72%),radial-gradient(1200px 420px at calc(96% + var(--sy) * -120px) calc(38% + var(--sy) * -140px),rgba(81,255,201,0.07),transparent 72%),linear-gradient(200deg,transparent calc(45% + var(--sy) * -8%),rgba(81,255,201,0.04) calc(57% + var(--sy) * -8%),transparent calc(70% + var(--sy) * -8%)),url(assets/iso-grid.svg);background-size:100% 100%,100% 100%,100% 100%,55.426px 64px;background-repeat:no-repeat,no-repeat,no-repeat,repeat;transition:--sy .9s cubic-bezier(.2,.7,.2,1)}
-.av-bg>header{position:sticky;top:0;z-index:50;max-width:none!important;padding:18px max(40px, calc((100% - 1200px) / 2))!important;background:rgba(20,21,42,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(38,41,72,.9)}
+.av-bg>header{position:sticky;top:0;z-index:50;max-width:none!important;padding:18px max(calc(40px * var(--k)), calc((100% - 1200px) / 2))!important;background:rgba(20,21,42,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(38,41,72,.9)}
 a,button,article{transition:color .2s ease,transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s ease,border-color .2s ease,filter .2s ease,background-size .3s ease}
 header nav a:not([style*="background"]),footer nav a{background-image:linear-gradient(90deg,#51FFC9,#BC77FF);background-size:0% 1px;background-repeat:no-repeat;background-position:0 100%;padding-bottom:4px}
 header nav a:not([style*="background"]):hover,footer nav a:hover{background-size:100% 1px}
@@ -26,6 +26,22 @@ a[style*="letter-spacing: 0.2em"]:not([style*="padding: 1"]):hover,a[style*="let
 a[style*="border: 1px solid #262948"]:hover{transform:translateY(-3px);border-color:rgba(81,255,201,.55)!important}
 article:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.25)}
 article[style*="solid"]:hover{border-color:rgba(81,255,201,.45)!important}
+:root{--k:1;--fs:1}
+.av-menu{display:none}
+@media (max-width:720px){
+:root{--k:.6;--fs:.78}
+.av-bg>header{row-gap:0!important;padding-top:12px!important;padding-bottom:12px!important}
+.av-bg>header>a img{height:34px!important}
+.av-menu{display:inline-flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;margin-left:auto;padding:0 11px;box-sizing:border-box;background:none;border:1px solid #3A3D63;border-radius:2px;cursor:pointer}
+.av-menu span{display:block;height:2px;background:#ECEDF7;transition:transform .25s ease,opacity .2s ease}
+.av-bg>header>nav{display:none!important;flex-basis:100%;flex-direction:column!important;align-items:stretch!important;gap:0!important;padding:10px 0 6px}
+.av-bg>header.av-open>nav{display:flex!important}
+.av-bg>header>nav a{padding:15px 0!important;border-top:1px solid #262948;font-size:13px!important;background-image:none!important}
+.av-bg>header>nav a[style*="background"]{margin-top:14px;padding:16px!important;text-align:center;border-top:0}
+.av-open .av-menu span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.av-open .av-menu span:nth-child(2){opacity:0}
+.av-open .av-menu span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 @keyframes av-rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 .av-reveal{opacity:0}
@@ -38,9 +54,10 @@ a[aria-label="Avaru Racing home"]:active img{transform:scale(.98)}
 <body>
 <div class="av-bg" style="background-color: #14152A; color: #ECEDF7; font-family: Inter, system-ui, sans-serif; min-height: 100vh">
 
-<header style="max-width: 1280px; margin: 0 auto; padding: 28px 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px">
+<header style="max-width: 1280px; margin: 0 auto; padding: 28px calc(40px * var(--k)); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px">
 <a href="index.html" aria-label="Avaru Racing home" style="display: flex"><img src="assets/avaru-racing-logo.svg" alt="Avaru Racing" style="height: 40px; width: auto"></a>
-<nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 32px; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase">
+<button type="button" class="av-menu" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
+<nav id="site-nav" aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 32px; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase">
 <a href="fleet.html" aria-current="page" style="color: #51FFC9; text-decoration: none">Fleet</a>
 <a href="story.html" style="color: #ECEDF7; text-decoration: none">Our story</a>
 <a href="races.html" style="color: #ECEDF7; text-decoration: none">Races</a>
@@ -49,13 +66,13 @@ a[aria-label="Avaru Racing home"]:active img{transform:scale(.98)}
 </nav>
 </header>
 
-<section style="max-width: 1280px; margin: 0 auto; padding: 88px 40px 64px; display: flex; flex-direction: column; gap: 24px">
+<section style="max-width: 1280px; margin: 0 auto; padding: calc(88px * var(--k)) calc(40px * var(--k)) calc(64px * var(--k)); display: flex; flex-direction: column; gap: 24px">
 <p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: #51FFC9">Fleet</p>
 <h1 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: clamp(36px, 4.6vw, 64px); line-height: 1.1">Built quiet. Flown fast.</h1>
 <p style="margin: 0; max-width: 640px; font-size: 19px; line-height: 1.6; color: #B8BBD6">Every Avaru ship is built in small numbers by the people who race it. Here is everything we have flown, and what is coming next.</p>
 </section>
 
-<section aria-label="All ships" style="max-width: 1280px; margin: 0 auto; padding: 0 40px 112px">
+<section aria-label="All ships" style="max-width: 1280px; margin: 0 auto; padding: 0 calc(40px * var(--k)) calc(112px * var(--k))">
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-bottom: 24px; border-bottom: 1px solid #262948; margin-bottom: 32px">
 <p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8B8FB5">All ships · 2</p>
 <p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8B8FB5">Newest first ↓</p>
@@ -65,7 +82,7 @@ a[aria-label="Avaru Racing home"]:active img{transform:scale(.98)}
 <div style="position: relative; aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; border-bottom: 1px dashed #3A3D63; background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0 10px, transparent 10px 20px)"><svg width="64%" viewBox="0 0 320 120" fill="none" aria-hidden="true" style="filter: blur(4px); opacity: 0.5"><path d="M14 66L84 46L176 40L250 50L306 62L250 76L176 84L84 80Z" fill="#2A2D52"/><path d="M140 44L186 22L226 48M140 82L186 100L226 74" stroke="#3A3D63" stroke-width="6" stroke-linecap="round"/></svg><span style="position: absolute; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; letter-spacing: 0.4em; color: #ECEDF7; border: 1px solid #ECEDF7; padding: 8px 14px; transform: rotate(-6deg)">Classified</span></div>
 <div style="padding: 28px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1">
 <p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #BC77FF">Atmospheric Sprinter · Our first ship</p>
-<h3 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: 52px; line-height: 1; letter-spacing: 0.04em; color: #FFFFFF"><span role="img" aria-label="Classified" title="Classified" style="display: inline-block; width: 2.6em; height: 0.8em; vertical-align: -0.02em; background: #ECEDF7; border-radius: 1px"></span></h3>
+<h3 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: calc(52px * var(--fs)); line-height: 1; letter-spacing: 0.04em; color: #FFFFFF"><span role="img" aria-label="Classified" title="Classified" style="display: inline-block; width: 2.6em; height: 0.8em; vertical-align: -0.02em; background: #ECEDF7; border-radius: 1px"></span></h3>
 <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B8BBD6">The ship that put Avaru on the grid. Its name, specs and photos are still under wraps.</p>
 <p style="margin: 0; padding-top: 8px; font-size: 14px; color: #8B8FB5">Specs classified</p>
 <p style="margin: auto 0 0; padding-top: 12px; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #51FFC9">Reveal coming soon</p>
@@ -75,7 +92,7 @@ a[aria-label="Avaru Racing home"]:active img{transform:scale(.98)}
 <div style="position: relative; aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; border-bottom: 1px dashed #3A3D63; background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0 10px, transparent 10px 20px)"><svg width="70%" viewBox="0 0 320 120" fill="none" aria-hidden="true" style="filter: blur(3px); opacity: 0.55"><path d="M8 74L96 50L190 44L262 30L312 58L262 82L190 78L96 86Z" fill="#2A2D52"/><path d="M120 50L170 18L210 44M120 84L170 104L210 78" stroke="#3A3D63" stroke-width="6" stroke-linecap="round"/></svg><span style="position: absolute; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; letter-spacing: 0.4em; color: #ECEDF7; border: 1px solid #ECEDF7; padding: 8px 14px; transform: rotate(-6deg)">Classified</span></div>
 <div style="padding: 28px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1">
 <p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #BC77FF">Next ship · [CLASS]</p>
-<h3 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: 52px; line-height: 1; letter-spacing: 0.04em; color: #6E7299">???</h3>
+<h3 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: calc(52px * var(--fs)); line-height: 1; letter-spacing: 0.04em; color: #6E7299">???</h3>
 <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B8BBD6">On the drawing board now. Everything the <span role="img" aria-label="Classified" title="Classified" style="display: inline-block; width: 2.6em; height: 0.8em; vertical-align: -0.02em; background: #ECEDF7; border-radius: 1px"></span> taught us, in a new hull. Our original dream made real.</p>
 <ol aria-label="Next ship progress" style="list-style: none; margin: 8px 0 0; padding: 16px 0 0; border-top: 1px solid #262948; display: flex; flex-direction: column; gap: 12px"><li style="display: flex; align-items: center; gap: 12px; font-size: 14px; color: #ECEDF7"><span style="width: 12px; height: 12px; border-radius: 50%; background: #51FFC9; flex: 0 0 auto"></span><span style="flex: 1 1 auto">Concept</span><span style="font-size: 12px; color: #8B8FB5">Done</span></li><li style="display: flex; align-items: center; gap: 12px; font-size: 14px; color: #ECEDF7"><span style="width: 12px; height: 12px; border-radius: 50%; border: 2px solid #BC77FF; box-sizing: border-box; box-shadow: 0 0 0 4px rgba(188, 119, 255, 0.2); flex: 0 0 auto"></span><span style="flex: 1 1 auto">Design</span><span style="font-size: 12px; color: #8B8FB5">In progress</span></li><li style="display: flex; align-items: center; gap: 12px; font-size: 14px; color: #6E7299"><span style="width: 12px; height: 12px; border-radius: 50%; border: 1px solid #3A3D63; box-sizing: border-box; flex: 0 0 auto"></span><span style="flex: 1 1 auto">Build</span><span style="font-size: 12px; color: #8B8FB5"></span></li><li style="display: flex; align-items: center; gap: 12px; font-size: 14px; color: #6E7299"><span style="width: 12px; height: 12px; border-radius: 50%; border: 1px solid #3A3D63; box-sizing: border-box; flex: 0 0 auto"></span><span style="flex: 1 1 auto">Testing</span><span style="font-size: 12px; color: #8B8FB5"></span></li><li style="display: flex; align-items: center; gap: 12px; font-size: 14px; color: #6E7299"><span style="width: 12px; height: 12px; border-radius: 50%; border: 1px solid #3A3D63; box-sizing: border-box; flex: 0 0 auto"></span><span style="flex: 1 1 auto">Race debut</span><span style="font-size: 12px; color: #8B8FB5">[SEASON]</span></li></ol>
 <a href="coming-soon.html#discord" title="Coming soon" style="margin-top: auto; padding-top: 12px; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase">Follow development →</a>
@@ -84,24 +101,24 @@ a[aria-label="Avaru Racing home"]:active img{transform:scale(.98)}
 <article style="border: 1px solid #262948; border-radius: 4px; background: linear-gradient(135deg, rgba(81, 255, 201, 0.08), rgba(188, 119, 255, 0.08)); padding: 28px; display: flex; flex-direction: column; justify-content: end; gap: 12px; min-height: 280px">
 <p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #51FFC9">Build with us</p>
 <h3 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: 24px; line-height: 1.3">The next ship could carry your name.</h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B8BBD6">We contract shipbuilders and credit them on every blueprint.</p>
-<a href="join.html" style="padding-top: 8px; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase">Get in touch →</a>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B8BBD6">We contract shipbuilders and credit them on every blueprint. We aren't taking applications right now.</p>
+<a href="join.html" style="padding-top: 8px; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase">Learn more →</a>
 </article>
 </div>
 </section>
 
-<section style="max-width: 1280px; margin: 0 auto; padding: 112px 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px">
-<div style="display: flex; flex-direction: column; gap: 16px; max-width: 640px"><h2 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: 36px; line-height: 1.2">Want your name on a future ship?</h2><p style="margin: 0; font-size: 17px; line-height: 1.65; color: #B8BBD6">We contract shipbuilders and credit them on every blueprint.</p></div>
-<a href="join.html" style="font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: #14152A; background: linear-gradient(100deg, #51FFC9, #BC77FF); padding: 18px 28px; border-radius: 2px">Build with us →</a>
+<section style="max-width: 1280px; margin: 0 auto; padding: calc(112px * var(--k)) calc(40px * var(--k)); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 16px; max-width: 640px"><h2 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: calc(36px * var(--fs)); line-height: 1.2">Want your name on a future ship?</h2><p style="margin: 0; font-size: 17px; line-height: 1.65; color: #B8BBD6">We contract shipbuilders and credit them on every blueprint. Applications are closed for now, but here's how it will work.</p></div>
+<a href="join.html" style="font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: #14152A; background: linear-gradient(100deg, #51FFC9, #BC77FF); padding: 18px 28px; border-radius: 2px">How it works →</a>
 </section>
 
 <footer style="border-top: 1px solid #262948; background: rgba(12, 13, 29, 0.6)">
-<div style="max-width: 1280px; margin: 0 auto; padding: 64px 40px 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 48px">
+<div style="max-width: 1280px; margin: 0 auto; padding: calc(64px * var(--k)) calc(40px * var(--k)) calc(40px * var(--k)); display: flex; flex-wrap: wrap; justify-content: space-between; gap: calc(48px * var(--k))">
 <div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 20px"><a href="index.html" aria-label="Avaru Racing home" style="display: flex"><img src="assets/avaru-racing-logo.svg" alt="Avaru Racing" style="height: 40px; width: auto"></a><p style="margin: 0; max-width: 340px; font-size: 15px; line-height: 1.6; color: #8B8FB5">Quiet in the pits. Relentless on the track.</p></div>
 <nav aria-label="Site" style="flex: 0 1 200px; display: flex; flex-direction: column; gap: 14px; font-size: 15px"><p style="margin: 0 0 4px; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8B8FB5">Site</p><a href="fleet.html" style="color: #ECEDF7; text-decoration: none">Fleet</a><a href="story.html" style="color: #ECEDF7; text-decoration: none">Our story</a><a href="races.html" style="color: #ECEDF7; text-decoration: none">Races</a><a href="partners.html" style="color: #ECEDF7; text-decoration: none">Partners</a><a href="join.html" style="color: #ECEDF7; text-decoration: none">Join the team</a></nav>
 <nav aria-label="Community" style="flex: 0 1 200px; display: flex; flex-direction: column; gap: 14px; font-size: 15px"><p style="margin: 0 0 4px; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8B8FB5">Community</p><a href="coming-soon.html#discord" title="Coming soon" style="color: #ECEDF7; text-decoration: none">Discord →</a><a href="coming-soon.html#workshop" title="Coming soon" style="color: #ECEDF7; text-decoration: none">Workshop →</a><a href="coming-soon.html#youtube" title="Coming soon" style="color: #ECEDF7; text-decoration: none">YouTube →</a></nav>
 </div>
-<div style="max-width: 1280px; margin: 0 auto; padding: 24px 40px 40px; border-top: 1px solid #262948; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 13px; color: #8B8FB5">
+<div style="max-width: 1280px; margin: 0 auto; padding: 24px calc(40px * var(--k)) calc(40px * var(--k)); border-top: 1px solid #262948; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 13px; color: #8B8FB5">
 <span>© 2026 Avaru Racing. A sister company of Avaru Starliners.</span><span>Founded by Enygma &amp; UncleAndy</span>
 </div>
 </footer>
@@ -141,6 +158,16 @@ a[aria-label="Avaru Racing home"]:active img{transform:scale(.98)}
     window.addEventListener('beforeprint', function () { els.forEach(function (el) { el.classList.add('av-in'); }); });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+})();
+</script>
+<script>
+(function () {
+  var h = document.querySelector('.av-bg > header'), b = h && h.querySelector('.av-menu');
+  if (!b) return;
+  function set(open) { h.classList.toggle('av-open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+  b.addEventListener('click', function () { set(!h.classList.contains('av-open')); });
+  h.querySelectorAll('nav a').forEach(function (a) { a.addEventListener('click', function () { set(false); }); });
+  window.addEventListener('resize', function () { if (window.innerWidth > 720) set(false); });
 })();
 </script>
 </body>

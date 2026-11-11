@@ -13,7 +13,7 @@ body{margin:0;background:#14152A}
 a{color:#51FFC9}a:hover{color:#D9B5FF}
 @property --sy{syntax:"<number>";inherits:true;initial-value:0}
 .av-bg{--sy:0;background-image:radial-gradient(1300px 300px at calc(86% + var(--sy) * 90px) calc(10% + var(--sy) * 180px),rgba(188,119,255,0.1),transparent 72%),radial-gradient(1500px 340px at calc(12% + var(--sy) * -110px) calc(48% + var(--sy) * 220px),rgba(81,255,201,0.06),transparent 72%),radial-gradient(1200px 300px at calc(82% + var(--sy) * 70px) calc(86% + var(--sy) * -180px),rgba(188,119,255,0.05),transparent 72%),linear-gradient(170deg,transparent calc(20% + var(--sy) * 10%),rgba(81,255,201,0.03) calc(30% + var(--sy) * 10%),transparent calc(40% + var(--sy) * 10%)),url(assets/iso-grid.svg);background-size:100% 100%,100% 100%,100% 100%,100% 100%,55.426px 64px;background-repeat:no-repeat,no-repeat,no-repeat,no-repeat,repeat;transition:--sy .9s cubic-bezier(.2,.7,.2,1)}
-.av-bg>header{position:sticky;top:0;z-index:50;max-width:none!important;padding:18px max(40px, calc((100% - 1200px) / 2))!important;background:rgba(20,21,42,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(38,41,72,.9)}
+.av-bg>header{position:sticky;top:0;z-index:50;max-width:none!important;padding:18px max(calc(40px * var(--k)), calc((100% - 1200px) / 2))!important;background:rgba(20,21,42,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(38,41,72,.9)}
 a,button{transition:color .2s ease,transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s ease,border-color .2s ease,filter .2s ease,background-size .3s ease}
 header nav a:not([style*="background"]),footer nav a{background-image:linear-gradient(90deg,#51FFC9,#BC77FF);background-size:0% 1px;background-repeat:no-repeat;background-position:0 100%;padding-bottom:4px}
 header nav a:not([style*="background"]):hover,footer nav a:hover{background-size:100% 1px}
@@ -24,6 +24,22 @@ a[style*="padding: 18px 28px"]:hover,button[type="submit"]:hover{transform:trans
 a[style*="padding: 17px 27px"]:hover{border-color:#51FFC9!important}
 a[style*="letter-spacing: 0.2em"]:not([style*="padding: 1"]):hover,a[style*="letter-spacing: 0.18em"]:not([style*="padding: 1"]):hover{transform:translateX(4px)}
 a[style*="border: 1px solid #262948"]:hover{transform:translateY(-3px);border-color:rgba(81,255,201,.55)!important}
+:root{--k:1;--fs:1}
+.av-menu{display:none}
+@media (max-width:720px){
+:root{--k:.6;--fs:.78}
+.av-bg>header{row-gap:0!important;padding-top:12px!important;padding-bottom:12px!important}
+.av-bg>header>a img{height:34px!important}
+.av-menu{display:inline-flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;margin-left:auto;padding:0 11px;box-sizing:border-box;background:none;border:1px solid #3A3D63;border-radius:2px;cursor:pointer}
+.av-menu span{display:block;height:2px;background:#ECEDF7;transition:transform .25s ease,opacity .2s ease}
+.av-bg>header>nav{display:none!important;flex-basis:100%;flex-direction:column!important;align-items:stretch!important;gap:0!important;padding:10px 0 6px}
+.av-bg>header.av-open>nav{display:flex!important}
+.av-bg>header>nav a{padding:15px 0!important;border-top:1px solid #262948;font-size:13px!important;background-image:none!important}
+.av-bg>header>nav a[style*="background"]{margin-top:14px;padding:16px!important;text-align:center;border-top:0}
+.av-open .av-menu span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.av-open .av-menu span:nth-child(2){opacity:0}
+.av-open .av-menu span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 @keyframes av-rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 .av-reveal{opacity:0}
@@ -36,9 +52,10 @@ a[aria-label="Avaru Racing home"]:active img{transform:scale(.98)}
 <body>
 <div class="av-bg" style="background-color: #14152A; color: #ECEDF7; font-family: Inter, system-ui, sans-serif; min-height: 100vh">
 
-<header style="max-width: 1280px; margin: 0 auto; padding: 28px 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px">
+<header style="max-width: 1280px; margin: 0 auto; padding: 28px calc(40px * var(--k)); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px">
 <a href="index.html" aria-label="Avaru Racing home" style="display: flex"><img src="assets/avaru-racing-logo.svg" alt="Avaru Racing" style="height: 40px; width: auto"></a>
-<nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 32px; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase">
+<button type="button" class="av-menu" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
+<nav id="site-nav" aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 32px; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase">
 <a href="fleet.html" style="color: #ECEDF7; text-decoration: none">Fleet</a>
 <a href="story.html" aria-current="page" style="color: #51FFC9; text-decoration: none">Our story</a>
 <a href="races.html" style="color: #ECEDF7; text-decoration: none">Races</a>
@@ -47,58 +64,58 @@ a[aria-label="Avaru Racing home"]:active img{transform:scale(.98)}
 </nav>
 </header>
 
-<section style="max-width: 1280px; margin: 0 auto; padding: 88px 40px 48px; display: flex; flex-direction: column; gap: 24px">
+<section style="max-width: 1280px; margin: 0 auto; padding: calc(88px * var(--k)) calc(40px * var(--k)) calc(48px * var(--k)); display: flex; flex-direction: column; gap: 24px">
 <p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: #51FFC9">Our story</p>
 <h1 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: clamp(36px, 4.6vw, 64px); line-height: 1.1">From the Aeres to the <span role="img" aria-label="Classified" title="Classified" style="display: inline-block; width: 2.6em; height: 0.8em; vertical-align: -0.02em; background: #ECEDF7; border-radius: 1px"></span>.</h1>
 <p style="margin: 0; max-width: 760px; font-size: 19px; line-height: 1.6; color: #B8BBD6; text-wrap: balance">How twenty-odd engineers walked away from good jobs to build&nbsp;what&nbsp;they&nbsp;love.</p>
 </section>
 
-<section aria-label="Story" style="max-width: 1280px; margin: 0 auto; padding: 0 40px 64px">
-<article style="display: flex; flex-wrap: wrap; gap: 32px 64px; padding: 64px 0; border-top: 1px solid #262948">
-<div style="flex: 0 1 280px; display: flex; flex-direction: column; gap: 12px"><span style="font-family: Michroma, sans-serif; font-size: 48px; line-height: 1; background: linear-gradient(100deg, #51FFC9, #BC77FF); -webkit-background-clip: text; background-clip: text; color: transparent">01</span><h2 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: 24px">The Aeres</h2></div>
+<section aria-label="Story" style="max-width: 1280px; margin: 0 auto; padding: 0 calc(40px * var(--k)) calc(64px * var(--k))">
+<article style="display: flex; flex-wrap: wrap; gap: 32px calc(64px * var(--k)); padding: calc(64px * var(--k)) 0; border-top: 1px solid #262948">
+<div style="flex: 0 1 280px; display: flex; flex-direction: column; gap: 12px"><span style="font-family: Michroma, sans-serif; font-size: calc(48px * var(--fs)); line-height: 1; background: linear-gradient(100deg, #51FFC9, #BC77FF); -webkit-background-clip: text; background-clip: text; color: transparent">01</span><h2 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: 24px">The Aeres</h2></div>
 <div style="flex: 1 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px"><p style="margin: 0; font-size: 17px; line-height: 1.65; color: #B8BBD6; font-size: 18px; line-height: 1.75">When Paradox Design and Uncle Andy Industries agreed to build the Aeres together, each company sent some of its best engineers to a joint team. Neither side expected much from the arrangement beyond a good ship.</p><p style="margin: 0; font-size: 17px; line-height: 1.65; color: #B8BBD6; font-size: 18px; line-height: 1.75">They got one. The Aeres did better than anyone had planned for. But the bigger surprise was the team itself. Engineers from two very different shops had learned to work as one: they argued well, finished each other's sketches, and by the end of the project they were already talking about what they would build next.</p></div>
 </article>
-<article style="display: flex; flex-wrap: wrap; gap: 32px 64px; padding: 64px 0; border-top: 1px solid #262948">
-<div style="flex: 0 1 280px; display: flex; flex-direction: column; gap: 12px"><span style="font-family: Michroma, sans-serif; font-size: 48px; line-height: 1; background: linear-gradient(100deg, #51FFC9, #BC77FF); -webkit-background-clip: text; background-clip: text; color: transparent">02</span><h2 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: 24px">Separate ways</h2></div>
+<article style="display: flex; flex-wrap: wrap; gap: 32px calc(64px * var(--k)); padding: calc(64px * var(--k)) 0; border-top: 1px solid #262948">
+<div style="flex: 0 1 280px; display: flex; flex-direction: column; gap: 12px"><span style="font-family: Michroma, sans-serif; font-size: calc(48px * var(--fs)); line-height: 1; background: linear-gradient(100deg, #51FFC9, #BC77FF); -webkit-background-clip: text; background-clip: text; color: transparent">02</span><h2 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: 24px">Separate ways</h2></div>
 <div style="flex: 1 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px"><p style="margin: 0; font-size: 17px; line-height: 1.65; color: #B8BBD6; font-size: 18px; line-height: 1.75">There was no next. Both companies decided their futures lay apart, and the joint team was disbanded. Its engineers went back to their old desks and their old assignments.</p><p style="margin: 0; font-size: 17px; line-height: 1.65; color: #B8BBD6; font-size: 18px; line-height: 1.75">They kept in touch anyway. Late messages, rough sketches and half-finished ideas passed back and forth: ships nobody had asked for and nobody was going to build. Until one evening someone asked the question that had been sitting under all of it:</p><p style="margin: 0; font-size: 17px; line-height: 1.65; color: #B8BBD6; font-size: 18px; line-height: 1.75"><em style="color: #ECEDF7">Why don't we make our own company, and build what we love instead of what we're told?</em></p></div>
 </article>
-<article style="display: flex; flex-wrap: wrap; gap: 32px 64px; padding: 64px 0; border-top: 1px solid #262948">
-<div style="flex: 0 1 280px; display: flex; flex-direction: column; gap: 12px"><span style="font-family: Michroma, sans-serif; font-size: 48px; line-height: 1; background: linear-gradient(100deg, #51FFC9, #BC77FF); -webkit-background-clip: text; background-clip: text; color: transparent">03</span><h2 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: 24px">The walkout</h2></div>
+<article style="display: flex; flex-wrap: wrap; gap: 32px calc(64px * var(--k)); padding: calc(64px * var(--k)) 0; border-top: 1px solid #262948">
+<div style="flex: 0 1 280px; display: flex; flex-direction: column; gap: 12px"><span style="font-family: Michroma, sans-serif; font-size: calc(48px * var(--fs)); line-height: 1; background: linear-gradient(100deg, #51FFC9, #BC77FF); -webkit-background-clip: text; background-clip: text; color: transparent">03</span><h2 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: 24px">The walkout</h2></div>
 <div style="flex: 1 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px"><p style="margin: 0; font-size: 17px; line-height: 1.65; color: #B8BBD6; font-size: 18px; line-height: 1.75">Twenty-odd engineers from the original team said yes. In the summer of 2026, they all resigned, and Avaru Racing was born.</p><p style="margin: 0; font-size: 17px; line-height: 1.65; color: #B8BBD6; font-size: 18px; line-height: 1.75">Their first plan was a smuggler-class ship, big and capable. It did not go to plan. Components for a hull that size were hard to find and harder to afford, and the few sponsors willing to back an unknown team had only so much to give. For a while, it looked like Avaru would end before it had started.</p></div>
 </article>
-<article style="display: flex; flex-wrap: wrap; gap: 32px 64px; padding: 64px 0; border-top: 1px solid #262948">
-<div style="flex: 0 1 280px; display: flex; flex-direction: column; gap: 12px"><span style="font-family: Michroma, sans-serif; font-size: 48px; line-height: 1; background: linear-gradient(100deg, #51FFC9, #BC77FF); -webkit-background-clip: text; background-clip: text; color: transparent">04</span><h2 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: 24px">A new class</h2></div>
+<article style="display: flex; flex-wrap: wrap; gap: 32px calc(64px * var(--k)); padding: calc(64px * var(--k)) 0; border-top: 1px solid #262948">
+<div style="flex: 0 1 280px; display: flex; flex-direction: column; gap: 12px"><span style="font-family: Michroma, sans-serif; font-size: calc(48px * var(--fs)); line-height: 1; background: linear-gradient(100deg, #51FFC9, #BC77FF); -webkit-background-clip: text; background-clip: text; color: transparent">04</span><h2 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: 24px">A new class</h2></div>
 <div style="flex: 1 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px"><p style="margin: 0; font-size: 17px; line-height: 1.65; color: #B8BBD6; font-size: 18px; line-height: 1.75">Then the Astra Racing League held its first race for a new class: the Atmospheric Sprinter. The ships were smaller and faster. Just as important, they were far cheaper to build.</p><p style="margin: 0; font-size: 17px; line-height: 1.65; color: #B8BBD6; font-size: 18px; line-height: 1.75">The engineers at Avaru saw the opening at once. The smuggler build went back on the shelf, and every hand turned to a sprinter.</p></div>
 </article>
-<article style="display: flex; flex-wrap: wrap; gap: 32px 64px; padding: 64px 0; border-top: 1px solid #262948">
-<div style="flex: 0 1 280px; display: flex; flex-direction: column; gap: 12px"><span style="font-family: Michroma, sans-serif; font-size: 48px; line-height: 1; background: linear-gradient(100deg, #51FFC9, #BC77FF); -webkit-background-clip: text; background-clip: text; color: transparent">05</span><h2 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: 24px">Building the <span role="img" aria-label="Classified" title="Classified" style="display: inline-block; width: 2.6em; height: 0.8em; vertical-align: -0.02em; background: #ECEDF7; border-radius: 1px"></span></h2></div>
+<article style="display: flex; flex-wrap: wrap; gap: 32px calc(64px * var(--k)); padding: calc(64px * var(--k)) 0; border-top: 1px solid #262948">
+<div style="flex: 0 1 280px; display: flex; flex-direction: column; gap: 12px"><span style="font-family: Michroma, sans-serif; font-size: calc(48px * var(--fs)); line-height: 1; background: linear-gradient(100deg, #51FFC9, #BC77FF); -webkit-background-clip: text; background-clip: text; color: transparent">05</span><h2 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: 24px">Building the <span role="img" aria-label="Classified" title="Classified" style="display: inline-block; width: 2.6em; height: 0.8em; vertical-align: -0.02em; background: #ECEDF7; border-radius: 1px"></span></h2></div>
 <div style="flex: 1 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px"><p style="margin: 0; font-size: 17px; line-height: 1.65; color: #B8BBD6; font-size: 18px; line-height: 1.75">They designed it, built it, tested it and refined it, then did all of it again. They named their first official ship for what it was: <span role="img" aria-label="Classified" title="Classified" style="display: inline-block; width: 2.6em; height: 0.8em; vertical-align: -0.02em; background: #ECEDF7; border-radius: 1px"></span>.</p><p style="margin: 0; font-size: 17px; line-height: 1.65; color: #B8BBD6; font-size: 18px; line-height: 1.75">It was not aerodynamically perfect, the way Paradox ships were. It was not supremely versatile, the way UAI ships had been. It was something new. It wasn't flashy, and it didn't call attention to itself.</p></div>
 </article>
-<article style="display: flex; flex-wrap: wrap; gap: 32px 64px; padding: 64px 0; border-top: 1px solid #262948">
-<div style="flex: 0 1 280px; display: flex; flex-direction: column; gap: 12px"><span style="font-family: Michroma, sans-serif; font-size: 48px; line-height: 1; background: linear-gradient(100deg, #51FFC9, #BC77FF); -webkit-background-clip: text; background-clip: text; color: transparent">06</span><h2 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: 24px">First race</h2></div>
+<article style="display: flex; flex-wrap: wrap; gap: 32px calc(64px * var(--k)); padding: calc(64px * var(--k)) 0; border-top: 1px solid #262948">
+<div style="flex: 0 1 280px; display: flex; flex-direction: column; gap: 12px"><span style="font-family: Michroma, sans-serif; font-size: calc(48px * var(--fs)); line-height: 1; background: linear-gradient(100deg, #51FFC9, #BC77FF); -webkit-background-clip: text; background-clip: text; color: transparent">06</span><h2 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: 24px">First race</h2></div>
 <div style="flex: 1 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px"><p style="margin: 0; font-size: 17px; line-height: 1.65; color: #B8BBD6; font-size: 18px; line-height: 1.75">On race day, the <span role="img" aria-label="Classified" title="Classified" style="display: inline-block; width: 2.6em; height: 0.8em; vertical-align: -0.02em; background: #ECEDF7; border-radius: 1px"></span> waited in the pitlane while its crew worked on it in silence. Then it took to the skies, and not a single fan, pilot or sponsor could help but stare. For an instant, the colors of the aurora borealis flashed across its hull. Lap after lap it ran: silent, consistent, blazing fast.</p><p style="margin: 0; font-size: 17px; line-height: 1.65; color: #B8BBD6; font-size: 18px; line-height: 1.75">In that moment, everyone watching saw what the engineers had seen years before. This new age, this league, was at the mercy of the Avaru <span role="img" aria-label="Classified" title="Classified" style="display: inline-block; width: 2.6em; height: 0.8em; vertical-align: -0.02em; background: #ECEDF7; border-radius: 1px"></span>. Racing would never be the same again.</p></div>
 </article>
 </section>
 
-<section aria-label="Founders" style="max-width: 1280px; margin: 0 auto; padding: 0 40px 96px; display: flex; flex-wrap: wrap; gap: 56px; align-items: center">
-<div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 20px"><p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: #51FFC9">The founders</p><h2 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: 36px; line-height: 1.2">Two shipbuilders from the team behind the Aeres.</h2></div>
+<section aria-label="Founders" style="max-width: 1280px; margin: 0 auto; padding: 0 calc(40px * var(--k)) calc(96px * var(--k)); display: flex; flex-wrap: wrap; gap: calc(56px * var(--k)); align-items: center">
+<div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 20px"><p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: #51FFC9">The founders</p><h2 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: calc(36px * var(--fs)); line-height: 1.2">Two shipbuilders from the team behind the Aeres.</h2></div>
 <div style="flex: 2 1 520px"><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px"><div style="border: 1px solid #262948; border-radius: 4px; background: rgba(20, 21, 42, 0.7); padding: 28px; display: flex; flex-direction: column; gap: 8px"><img src="assets/founder-enygma.png" alt="Enygma" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover"><p style="margin: 12px 0 0; font-family: Michroma, sans-serif; font-size: 18px">Enygma</p><p style="margin: 0; font-size: 15px; color: #B8BBD6">Lead Systems Engineer &amp; Co-founder</p></div><div style="border: 1px solid #262948; border-radius: 4px; background: rgba(20, 21, 42, 0.7); padding: 28px; display: flex; flex-direction: column; gap: 8px"><img src="assets/founder-uncleandy.png" alt="UncleAndy" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover"><p style="margin: 12px 0 0; font-family: Michroma, sans-serif; font-size: 18px">UncleAndy</p><p style="margin: 0; font-size: 15px; color: #B8BBD6">Chief Designer &amp; Co-founder</p></div></div></div>
 </section>
 
 <section style="background: rgba(12, 13, 29, 0.85); border-top: 1px solid #262948">
-<div style="max-width: 1280px; margin: 0 auto; padding: 96px 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px">
-<h2 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: 36px; line-height: 1.2; max-width: 620px">The story is still being written.</h2>
+<div style="max-width: 1280px; margin: 0 auto; padding: calc(96px * var(--k)) calc(40px * var(--k)); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px">
+<h2 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: calc(36px * var(--fs)); line-height: 1.2; max-width: 620px">The story is still being written.</h2>
 <div style="display: flex; flex-wrap: wrap; gap: 16px"><a href="fleet.html" style="font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: #14152A; background: linear-gradient(100deg, #51FFC9, #BC77FF); padding: 18px 28px; border-radius: 2px">Meet the fleet →</a><a href="join.html" style="font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: #ECEDF7; border: 1px solid #3A3D63; padding: 17px 27px; border-radius: 2px">Build with us →</a></div>
 </div>
 </section>
 
 <footer style="border-top: 1px solid #262948; background: rgba(12, 13, 29, 0.6)">
-<div style="max-width: 1280px; margin: 0 auto; padding: 64px 40px 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 48px">
+<div style="max-width: 1280px; margin: 0 auto; padding: calc(64px * var(--k)) calc(40px * var(--k)) calc(40px * var(--k)); display: flex; flex-wrap: wrap; justify-content: space-between; gap: calc(48px * var(--k))">
 <div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 20px"><a href="index.html" aria-label="Avaru Racing home" style="display: flex"><img src="assets/avaru-racing-logo.svg" alt="Avaru Racing" style="height: 40px; width: auto"></a><p style="margin: 0; max-width: 340px; font-size: 15px; line-height: 1.6; color: #8B8FB5">Quiet in the pits. Relentless on the track.</p></div>
 <nav aria-label="Site" style="flex: 0 1 200px; display: flex; flex-direction: column; gap: 14px; font-size: 15px"><p style="margin: 0 0 4px; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8B8FB5">Site</p><a href="fleet.html" style="color: #ECEDF7; text-decoration: none">Fleet</a><a href="story.html" style="color: #ECEDF7; text-decoration: none">Our story</a><a href="races.html" style="color: #ECEDF7; text-decoration: none">Races</a><a href="partners.html" style="color: #ECEDF7; text-decoration: none">Partners</a><a href="join.html" style="color: #ECEDF7; text-decoration: none">Join the team</a></nav>
 <nav aria-label="Community" style="flex: 0 1 200px; display: flex; flex-direction: column; gap: 14px; font-size: 15px"><p style="margin: 0 0 4px; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8B8FB5">Community</p><a href="coming-soon.html#discord" title="Coming soon" style="color: #ECEDF7; text-decoration: none">Discord →</a><a href="coming-soon.html#workshop" title="Coming soon" style="color: #ECEDF7; text-decoration: none">Workshop →</a><a href="coming-soon.html#youtube" title="Coming soon" style="color: #ECEDF7; text-decoration: none">YouTube →</a></nav>
 </div>
-<div style="max-width: 1280px; margin: 0 auto; padding: 24px 40px 40px; border-top: 1px solid #262948; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 13px; color: #8B8FB5">
+<div style="max-width: 1280px; margin: 0 auto; padding: 24px calc(40px * var(--k)) calc(40px * var(--k)); border-top: 1px solid #262948; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 13px; color: #8B8FB5">
 <span>© 2026 Avaru Racing. A sister company of Avaru Starliners.</span><span>Founded by Enygma &amp; UncleAndy</span>
 </div>
 </footer>
@@ -138,6 +155,16 @@ a[aria-label="Avaru Racing home"]:active img{transform:scale(.98)}
     window.addEventListener('beforeprint', function () { els.forEach(function (el) { el.classList.add('av-in'); }); });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+})();
+</script>
+<script>
+(function () {
+  var h = document.querySelector('.av-bg > header'), b = h && h.querySelector('.av-menu');
+  if (!b) return;
+  function set(open) { h.classList.toggle('av-open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+  b.addEventListener('click', function () { set(!h.classList.contains('av-open')); });
+  h.querySelectorAll('nav a').forEach(function (a) { a.addEventListener('click', function () { set(false); }); });
+  window.addEventListener('resize', function () { if (window.innerWidth > 720) set(false); });
 })();
 </script>
 </body>
