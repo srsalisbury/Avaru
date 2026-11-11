@@ -12,7 +12,13 @@ html{scroll-padding-top:96px;scroll-behavior:smooth}
 body{margin:0;background:#14152A}
 a{color:#51FFC9}a:hover{color:#D9B5FF}
 @property --sy{syntax:"<number>";inherits:true;initial-value:0}
-.av-bg{--sy:0;background-image:radial-gradient(1400px 420px at calc(78% + var(--sy) * -80px) calc(4% + var(--sy) * 220px),rgba(81,255,201,0.11),transparent 72%),radial-gradient(1100px 360px at calc(8% + var(--sy) * 120px) calc(32% + var(--sy) * -160px),rgba(188,119,255,0.09),transparent 72%),radial-gradient(1500px 300px at calc(92% + var(--sy) * -60px) calc(68% + var(--sy) * 180px),rgba(81,255,201,0.06),transparent 72%),linear-gradient(160deg,transparent calc(30% + var(--sy) * 8%),rgba(188,119,255,0.04) calc(42% + var(--sy) * 8%),transparent calc(55% + var(--sy) * 8%)),url(assets/iso-grid.svg);background-size:100% 100%,100% 100%,100% 100%,100% 100%,55.426px 64px;background-repeat:no-repeat,no-repeat,no-repeat,no-repeat,repeat;transition:--sy .9s cubic-bezier(.2,.7,.2,1)}
+.av-bg{position:relative;isolation:isolate;background-image:url(assets/iso-grid.svg);background-size:55.426px 64px}
+.av-bg::before,.av-bg::after{content:"";position:absolute;top:0;bottom:0;width:min(16vw,240px);z-index:-1;pointer-events:none;-webkit-mask-repeat:repeat-y;mask-repeat:repeat-y;-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.55),#000 50%,rgba(0,0,0,.55));mask-image:linear-gradient(180deg,rgba(0,0,0,.55),#000 50%,rgba(0,0,0,.55));animation:av-drift 30s ease-in-out infinite alternate,av-breathe 16s ease-in-out infinite alternate,av-pulse-glow 10s ease-in-out infinite alternate}
+.av-bg::before{left:0;transform-origin:left center;background:linear-gradient(90deg,rgba(81,255,201,.11),rgba(81,255,201,.04) 45%,rgba(81,255,201,0));-webkit-mask-size:100% 1800px;mask-size:100% 1800px}
+.av-bg::after{right:0;transform-origin:right center;background:linear-gradient(270deg,rgba(188,119,255,.11),rgba(188,119,255,.04) 45%,rgba(188,119,255,0));-webkit-mask-size:100% 2200px;mask-size:100% 2200px;animation-duration:36s,19s,12s;animation-delay:-11s,-6s,-4s}
+@keyframes av-drift{from{-webkit-mask-position:0 -120px;mask-position:0 -120px}to{-webkit-mask-position:0 120px;mask-position:0 120px}}
+@keyframes av-breathe{from{transform:scaleX(.92)}to{transform:scaleX(1.08)}}
+@keyframes av-pulse-glow{from{opacity:.8}to{opacity:1}}
 .av-bg>header{position:sticky;top:0;z-index:50;max-width:none!important;padding:18px max(calc(40px * var(--k)), calc((100% - 1200px) / 2))!important;background:rgba(20,21,42,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(38,41,72,.9)}
 a,button,article{transition:color .2s ease,transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s ease,border-color .2s ease,filter .2s ease,background-size .3s ease}
 header nav a:not([style*="background"]),footer nav a{background-image:linear-gradient(90deg,#51FFC9,#BC77FF);background-size:0% 1px;background-repeat:no-repeat;background-position:0 100%;padding-bottom:4px}
@@ -79,7 +85,6 @@ a[aria-label="Avaru Racing home"]:active img{transform:scale(.98)}
 </header>
 
 <section id="top" class="av-photo" aria-label="Team announcement" style="--img: url(assets/bg/track-107.jpg); --pos: 50% 25%; position: relative; overflow: hidden; border-bottom: 1px solid #262948">
-<div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(900px 420px at 50% 0%, rgba(81, 255, 201, 0.14), transparent 70%), radial-gradient(800px 420px at 50% 100%, rgba(188, 119, 255, 0.14), transparent 70%)"></div>
 <img src="assets/avaru-emblem.svg" alt="" aria-hidden="true" style="position: absolute; left: 50%; top: 46%; width: min(720px, 120vw); max-width: none; height: auto; transform: translate(-50%, -50%); opacity: 0.05; pointer-events: none">
 <div style="position: relative; max-width: 1280px; margin: 0 auto; padding: calc(96px * var(--k)) calc(40px * var(--k)) calc(88px * var(--k)); display: flex; flex-direction: column; align-items: center; text-align: center; gap: 30px">
 <p style="margin: 0; display: inline-flex; align-items: center; gap: 12px; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: #51FFC9; border: 1px solid rgba(81, 255, 201, 0.4); background: rgba(81, 255, 201, 0.06); border-radius: 999px; padding: 9px 18px"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; flex: 0 0 auto; background: #51FFC9; animation: av-pulse 2s ease-out infinite"></span>Team announcement · November 11, 2026</p>
