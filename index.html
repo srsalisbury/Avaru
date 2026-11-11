@@ -62,6 +62,7 @@ article[style*="solid"]:hover{border-color:rgba(81,255,201,.45)!important}
 .av-photo::after{z-index:-1;background:radial-gradient(ellipse 85% 90% at 50% 50%,rgba(20,21,42,var(--tint,.62)),rgba(20,21,42,.93) 100%)}
 .av-creed-stack{display:none}
 @media (max-width:720px){.av-creed{justify-content:center!important;text-align:center}.av-creed>p{flex-basis:100%!important}.av-creed-wide{display:none}.av-creed-stack{display:block}}
+.av-ref{color:inherit;text-decoration:underline;text-decoration-color:rgba(81,255,201,.55);text-decoration-thickness:1px;text-underline-offset:3px}.av-ref:hover{color:#51FFC9;text-decoration-color:#51FFC9}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 @keyframes av-rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 .av-reveal{opacity:0}
@@ -129,7 +130,7 @@ a[aria-label="Avaru Racing home"]:active img{transform:scale(.98)}
 <div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 20px">
 <p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: #51FFC9">The founders</p>
 <h2 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: calc(36px * var(--fs)); line-height: 1.2">The two who started it.</h2>
-<p style="margin: 0; font-size: 17px; line-height: 1.65; color: #B8BBD6">Two shipbuilders from the team behind the Aeres. At Avaru, the person who designed a part is the person who repairs it in the pitlane.</p>
+<p style="margin: 0; font-size: 17px; line-height: 1.65; color: #B8BBD6">Two shipbuilders from the team behind the <a class="av-ref" href="fleet.html#aeres">Aeres</a>. At Avaru, the person who designed a part is the person who repairs it in the pitlane.</p>
 </div>
 <div style="flex: 2 1 520px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px">
 <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid #262948; border-radius: 4px; padding: 28px; display: flex; flex-direction: column; gap: 8px">
