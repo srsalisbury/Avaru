@@ -43,6 +43,13 @@ article[style*="solid"]:hover{border-color:rgba(81,255,201,.45)!important}
 .av-open .av-menu span:nth-child(2){opacity:0}
 .av-open .av-menu span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 }
+.av-bg{overflow-x:clip}
+.av-photo{position:relative;isolation:isolate}
+.av-photo::before,.av-photo::after{content:"";position:absolute;top:0;bottom:0;left:calc(50% - 50vw);right:calc(50% - 50vw);pointer-events:none}
+.av-photo:not([style*="border-bottom"]):not([style*="border-top"]){margin-bottom:calc(48px * var(--k))!important}
+.av-photo:not([style*="border-bottom"]):not([style*="border-top"])::after{border-bottom:1px solid #262948}
+.av-photo::before{z-index:-2;background:var(--img) var(--pos,50% 50%)/cover no-repeat;filter:saturate(.8)}
+.av-photo::after{z-index:-1;background:radial-gradient(ellipse 85% 90% at 50% 50%,rgba(20,21,42,var(--tint,.62)),rgba(20,21,42,.93) 100%)}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 @keyframes av-rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 .av-reveal{opacity:0}
@@ -67,7 +74,7 @@ a[aria-label="Avaru Racing home"]:active img{transform:scale(.98)}
 </nav>
 </header>
 
-<section style="max-width: 1280px; margin: 0 auto; padding: calc(88px * var(--k)) calc(40px * var(--k)) calc(64px * var(--k)); display: flex; flex-direction: column; gap: 24px">
+<section class="av-photo" style="--img: url(assets/bg/track-104.jpg); --pos: 50% 45%; max-width: 1280px; margin: 0 auto; padding: calc(88px * var(--k)) calc(40px * var(--k)) calc(64px * var(--k)); display: flex; flex-direction: column; gap: 24px">
 <p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: #51FFC9">Races</p>
 <h1 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: clamp(36px, 4.6vw, 64px); line-height: 1.1">Astra Racing League</h1>
 <p style="margin: 0; max-width: 640px; font-size: 19px; line-height: 1.6; color: #B8BBD6">We'll race in the league's Atmospheric Sprinter class: small, fast ships on tight planetary courses.</p>

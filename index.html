@@ -47,6 +47,13 @@ article[style*="solid"]:hover{border-color:rgba(81,255,201,.45)!important}
 .av-open .av-menu span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 }
 @media (max-width:720px){[style*="aspect-ratio: 21 / 9"]{aspect-ratio:4 / 3!important}[style*="aspect-ratio: 21 / 9"] img{object-position:47% 55%!important}[style*="aspect-ratio: 21 / 9"] p{padding:10px 14px!important;font-size:10px!important}}
+.av-bg{overflow-x:clip}
+.av-photo{position:relative;isolation:isolate}
+.av-photo::before,.av-photo::after{content:"";position:absolute;top:0;bottom:0;left:calc(50% - 50vw);right:calc(50% - 50vw);pointer-events:none}
+.av-photo:not([style*="border-bottom"]):not([style*="border-top"]){margin-bottom:calc(48px * var(--k))!important}
+.av-photo:not([style*="border-bottom"]):not([style*="border-top"])::after{border-bottom:1px solid #262948}
+.av-photo::before{z-index:-2;background:var(--img) var(--pos,50% 50%)/cover no-repeat;filter:saturate(.8)}
+.av-photo::after{z-index:-1;background:radial-gradient(ellipse 85% 90% at 50% 50%,rgba(20,21,42,var(--tint,.62)),rgba(20,21,42,.93) 100%)}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 @keyframes av-rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 .av-reveal{opacity:0}
@@ -71,7 +78,7 @@ a[aria-label="Avaru Racing home"]:active img{transform:scale(.98)}
 </nav>
 </header>
 
-<section id="top" aria-label="Team announcement" style="position: relative; overflow: hidden; border-bottom: 1px solid #262948">
+<section id="top" class="av-photo" aria-label="Team announcement" style="--img: url(assets/bg/track-107.jpg); --pos: 50% 25%; position: relative; overflow: hidden; border-bottom: 1px solid #262948">
 <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(900px 420px at 50% 0%, rgba(81, 255, 201, 0.14), transparent 70%), radial-gradient(800px 420px at 50% 100%, rgba(188, 119, 255, 0.14), transparent 70%)"></div>
 <img src="assets/avaru-emblem.svg" alt="" aria-hidden="true" style="position: absolute; left: 50%; top: 46%; width: min(720px, 120vw); max-width: none; height: auto; transform: translate(-50%, -50%); opacity: 0.05; pointer-events: none">
 <div style="position: relative; max-width: 1280px; margin: 0 auto; padding: calc(96px * var(--k)) calc(40px * var(--k)) calc(88px * var(--k)); display: flex; flex-direction: column; align-items: center; text-align: center; gap: 30px">
@@ -149,7 +156,7 @@ a[aria-label="Avaru Racing home"]:active img{transform:scale(.98)}
 </div>
 </section>
 
-<section aria-label="Mission" style="background: #0C0D1D; border-top: 1px solid #262948; border-bottom: 1px solid #262948">
+<section aria-label="Mission" class="av-photo" style="--img: url(assets/bg/track-202.jpg); --pos: 50% 50%; background: #0C0D1D; border-top: 1px solid #262948; border-bottom: 1px solid #262948">
 <div style="max-width: 1040px; margin: 0 auto; padding: calc(120px * var(--k)) calc(40px * var(--k)); display: flex; flex-direction: column; gap: 28px; align-items: center; text-align: center">
 <p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: #51FFC9">Our mission</p>
 <p style="margin: 0; font-size: clamp(26px, 2.8vw, 38px); line-height: 1.4; font-weight: 500">We don't chase perfection. We chase the lap: clean, consistent, and faster than anyone expected.</p>

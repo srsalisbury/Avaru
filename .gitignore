@@ -1,3 +1,7 @@
 # Classified: unrevealed ship pages and photos stay on this computer until launch day.
 *.classified.html
 assets/classified/
+
+# Full-size source images stay on this computer; the site uses the web versions in assets/bg/ and aeres-hero.jpg.
+assets/Screenshot_*.png
+assets/aeres_source.jpg
