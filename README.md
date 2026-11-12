@@ -11,7 +11,6 @@ Static site for Avaru Racing. No build step: every page is plain HTML with its s
 | `races.html` | Races |
 | `partners.html` | Partners |
 | `join.html` | Join the team |
-| `404.html` | Page not found (Cloudflare Pages shows it for unknown addresses; its links start with / so it works at any depth) |
 
 `assets/` holds the logos and the background grid. Fonts (Michroma, Tektur, Inter) load from Google Fonts.
 
