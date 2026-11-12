@@ -56,6 +56,7 @@ article[style*="solid"]:hover{border-color:rgba(81,255,201,.45)!important}
 .av-photo:not([style*="border-bottom"]):not([style*="border-top"])::after{border-bottom:1px solid #262948}
 .av-photo::before{z-index:-2;background:var(--img) var(--pos,50% 50%)/cover no-repeat;filter:saturate(.8)}
 .av-photo::after{z-index:-1;background:radial-gradient(ellipse 85% 90% at 50% 50%,rgba(20,21,42,var(--tint,.62)),rgba(20,21,42,.93) 100%)}
+.av-ref{color:inherit;text-decoration:underline;text-decoration-color:rgba(81,255,201,.55);text-decoration-thickness:1px;text-underline-offset:3px}.av-ref:hover{color:#51FFC9;text-decoration-color:#51FFC9}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 @keyframes av-rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 .av-reveal{opacity:0}
@@ -97,7 +98,7 @@ a[aria-label="Avaru Racing home"]:active img{transform:scale(.98)}
 </div>
 <div style="flex: 1 1 420px; padding: calc(48px * var(--k)); display: flex; flex-direction: column; justify-content: center; gap: 16px">
 <p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #BC77FF">Atmospheric turbines</p>
-<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #D5D7EA">Builders of the atmospheric turbines that drive our ships through thick air and tight corners. The first sponsor to say yes, and the reason the <span role="img" aria-label="Classified" title="Classified" style="display: inline-block; width: 2.6em; height: 0.8em; vertical-align: -0.02em; background: #ECEDF7; border-radius: 1px"></span> made it to its first race.</p>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #D5D7EA">Builders of the atmospheric turbines that drive our ships through thick air and tight corners. The first sponsor to say yes, and the reason the <a class="av-ref" href="fleet.html#eka">Eka</a> made it to its first race.</p>
 </div>
 </div>
 </section>
