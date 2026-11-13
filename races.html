@@ -58,6 +58,12 @@ article[style*="solid"]:hover{border-color:rgba(81,255,201,.45)!important}
 .av-photo::after{z-index:-1;background:radial-gradient(ellipse 85% 90% at 50% 50%,rgba(20,21,42,var(--tint,.62)),rgba(20,21,42,.93) 100%)}
 .av-ref{color:inherit;text-decoration:underline;text-decoration-color:rgba(81,255,201,.55);text-decoration-thickness:1px;text-underline-offset:3px}.av-ref:hover{color:#51FFC9;text-decoration-color:#51FFC9}
 @media (max-width:720px){#results table{min-width:0!important}#results thead{display:none}#results tr{display:block;padding:16px 20px}#results tr+tr,#results tbody tr{border-top:1px solid #262948}#results tbody tr:first-child{border-top:0}#results th,#results td{display:block;padding:0!important}#results td:nth-child(2){margin:4px 0 10px;font-size:14px!important}#results td span{white-space:normal!important}}
+.av-count{display:flex;gap:10px}.av-count>div{flex:1 1 0;min-width:0;max-width:112px;border:1px solid #262948;border-radius:4px;background:rgba(12,13,29,.6);padding:14px 6px 12px;text-align:center}.av-count b{display:block;font-family:Michroma,sans-serif;font-weight:400;font-size:calc(30px * var(--fs));line-height:1.2;font-variant-numeric:tabular-nums}.av-count span{display:block;margin-top:6px;font-family:Tektur,Michroma,sans-serif;font-weight:600;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#8B8FB5}.av-open{margin:0;font-family:Michroma,sans-serif;font-size:calc(30px * var(--fs));line-height:1.2;background:linear-gradient(100deg,#51FFC9,#BC77FF);-webkit-background-clip:text;background-clip:text;color:transparent}.av-open[hidden],.av-count[hidden]{display:none}@media (max-width:720px){.av-count{gap:8px}.av-count span{font-size:9px;letter-spacing:.06em}}.av-race-img{position:relative;flex:1 1 380px;min-height:280px}.av-race-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:42% 50%}
+.av-shot::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(135deg,rgba(81,255,201,.2),rgba(81,255,201,0) 45%,rgba(188,119,255,0) 55%,rgba(188,119,255,.2));opacity:0;transition:opacity .45s ease}
+.av-shot::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 60px rgba(12,13,29,.55);transition:opacity .45s ease}
+.av-shot:hover::before{opacity:1}
+.av-shot:hover::after{opacity:.35}
+.av-btn{transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s ease}.av-btn:hover{transform:scale(1.05);box-shadow:-8px 0 24px rgba(81,255,201,.32),8px 0 24px rgba(188,119,255,.32)}.av-btn:active{transform:scale(1.01);transition-duration:.15s}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 @keyframes av-rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 .av-reveal{opacity:0}
@@ -88,6 +94,19 @@ a[aria-label="Avaru Racing home"]:active img{transform:scale(.98)}
 <p style="margin: 0; max-width: 640px; font-size: 19px; line-height: 1.6; color: #B8BBD6">We race in the league's Light Atmo Smuggler and Atmospheric Sprinter classes: small, fast ships on tight planetary courses.</p>
 </section>
 
+<section id="next-race" aria-label="Next race" style="max-width: 1280px; margin: 0 auto; padding: 0 calc(40px * var(--k)) calc(64px * var(--k))">
+<div style="border: 1px solid #262948; border-radius: 4px; background: rgba(20, 21, 42, 0.7); display: flex; flex-wrap: wrap; overflow: hidden">
+<div style="flex: 1 1 460px; padding: calc(48px * var(--k)); display: flex; flex-direction: column; gap: 18px; justify-content: center">
+<p style="margin: 0; display: inline-flex; align-self: flex-start; align-items: center; gap: 10px; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #51FFC9"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: #51FFC9; animation: av-pulse 2s ease-out infinite"></span><span data-race-status>Next race · Time trial</span></p>
+<h2 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: calc(36px * var(--fs)); line-height: 1.2">Verdure Concept Course Time Trials I</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.65; color: #B8BBD6">The race window <span data-race-verb>opens</span> <strong style="color: #ECEDF7; font-weight: 600">Saturday, November 14 at 2:00 PM PST</strong><span data-race-local></span>. The event is hosted on Diggrok's Discord server.</p>
+<div class="av-count" data-race-count role="timer" aria-label="Time until the race window opens"><div><b data-unit="d">--</b><span>Days</span></div><div><b data-unit="h">--</b><span>Hours</span></div><div><b data-unit="m">--</b><span>Minutes</span></div><div><b data-unit="s">--</b><span>Seconds</span></div></div>
+<p class="av-open" data-race-open hidden>Race window open</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 6px"><a href="https://discord.gg/N4DgNfw7g" target="_blank" rel="noopener" class="av-btn" style="font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; font-size: 12px; letter-spacing: 0.14em; text-decoration: none; color: #14152A; background: linear-gradient(100deg, #51FFC9, #BC77FF); padding: 14px 22px; border-radius: 2px">Join Diggrok's Discord ↗</a></div>
+</div>
+<div class="av-shot av-race-img"><img src="assets/tracks/verdure.jpg" alt="A race gate on a ridge above the Verdure canyons" loading="lazy"></div>
+</div>
+</section>
 <section aria-label="League status" style="max-width: 1280px; margin: 0 auto; padding: 0 calc(40px * var(--k)) calc(96px * var(--k))">
 <div style="border: 1px solid #262948; border-radius: 4px; background: rgba(20, 21, 42, 0.7); display: flex; flex-wrap: wrap; overflow: hidden">
 <div style="flex: 1 1 460px; padding: calc(48px * var(--k)); display: flex; flex-direction: column; gap: 18px; justify-content: center">
@@ -150,6 +169,44 @@ a[aria-label="Avaru Racing home"]:active img{transform:scale(.98)}
 </footer>
 
 </div>
+<script>
+// Next race: count down to the race window, then say it's open.
+(function () {
+  var OPENS = Date.parse('2026-11-14T22:00:00Z');   // Sat Nov 14, 2:00 PM PST
+  var box = document.getElementById('next-race'); if (!box) return;
+  var count = box.querySelector('[data-race-count]'), open = box.querySelector('[data-race-open]'), status = box.querySelector('[data-race-status]');
+  var cells = {}; [].forEach.call(box.querySelectorAll('[data-unit]'), function (b) { cells[b.getAttribute('data-unit')] = b; });
+  // the viewer's own clock time, when they aren't on Pacific time
+  try {
+    var at = new Date(OPENS), PT = 'America/Los_Angeles';
+    var opt = { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' };
+    var mine = at.toLocaleString([], opt), pac = at.toLocaleString([], Object.assign({ timeZone: PT }, opt));
+    if (mine !== pac) {
+      // name the day too when it falls on a different day for the viewer
+      if (at.toLocaleDateString([], { weekday: 'long' }) !== at.toLocaleDateString([], { weekday: 'long', timeZone: PT }))
+        mine = at.toLocaleString([], Object.assign({ weekday: 'long' }, opt));
+      box.querySelector('[data-race-local]').textContent = ' (' + mine + ' for you)';
+    }
+  } catch (e) {}
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function tick() {
+    var left = OPENS - Date.now();
+    if (left <= 0) {
+      count.hidden = true; open.hidden = false;
+      status.textContent = 'Race window open';
+      box.querySelector('[data-race-verb]').textContent = 'opened';
+      return;
+    }
+    var s = Math.floor(left / 1000);
+    cells.d.textContent = Math.floor(s / 86400);
+    cells.h.textContent = pad(Math.floor(s / 3600) % 24);
+    cells.m.textContent = pad(Math.floor(s / 60) % 60);
+    cells.s.textContent = pad(s % 60);
+    setTimeout(tick, 1000 - (Date.now() % 1000));
+  }
+  tick();
+})();
+</script>
 <script>
 (function () {
   function start() {
