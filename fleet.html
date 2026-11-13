@@ -69,7 +69,7 @@ article[style*="solid"]:hover{border-color:rgba(81,255,201,.45)!important}
 .av-ship-img{position:relative;height:clamp(150px,18vw,230px);overflow:hidden;border-bottom:1px solid #262948;transition:height .5s cubic-bezier(.2,.7,.2,1)}
 .av-classified .av-ship-img{border-bottom-style:dashed;border-bottom-color:#3A3D63}
 .av-ship[open] .av-ship-img{height:clamp(220px,40vw,500px)}
-.av-ship-img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:44% 56%}
+.av-ship-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:44% 56%}
 .av-ship-head{display:flex;align-items:center;gap:20px;padding:22px 28px}
 .av-ship-titles{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px}
 .av-ship-toggle{flex:0 0 auto;display:grid;place-items:center;width:28px;height:28px;color:#6E7299;transition:transform .3s ease,color .3s ease}
@@ -84,8 +84,7 @@ article[style*="solid"]:hover{border-color:rgba(81,255,201,.45)!important}
 .av-stamp{position:relative;z-index:2;font-family:Tektur,Michroma,sans-serif;font-weight:600;font-size:clamp(18px,2.4vw,30px);letter-spacing:.42em;text-transform:uppercase;color:#ECEDF7;border:1.5px solid #ECEDF7;padding:.42em .7em .42em 1.12em;background:rgba(12,13,29,.6);transform:rotate(-4deg)}
 .av-btn{transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s ease}.av-btn:hover{transform:scale(1.05);box-shadow:-8px 0 24px rgba(81,255,201,.32),8px 0 24px rgba(188,119,255,.32)}.av-btn:active{transform:scale(1.01);transition-duration:.15s}
 .av-ship.av-closing .av-ship-img{height:clamp(150px,18vw,230px)!important}
-.av-ship-img>img{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
-@media (max-width:720px){#eka:not([open]) .av-ship-img>img,#eka.av-closing .av-ship-img>img{transform:scale(1.1);transform-origin:50% 48%}}
+@media (max-width:720px){#eka .av-ship-img img{object-position:50% 36%!important}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 @keyframes av-rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 .av-reveal{opacity:0}
@@ -137,7 +136,7 @@ a[aria-label="Avaru Racing home"]:active img{transform:scale(.98)}
 </details>
 <details class="av-ship" id="eka">
 <summary>
-<div class="av-ship-img av-shot"><img src="assets/ships/eka-reveal.jpg" alt="The Eka racing low over a lagoon" loading="lazy" style="object-position: 50% 50%; filter: brightness(0.96) saturate(0.96) contrast(1.04)"></div>
+<div class="av-ship-img av-shot"><picture><source media="(max-width: 720px)" srcset="assets/ships/eka-reveal-m.jpg"><img src="assets/ships/eka-reveal.jpg" alt="The Eka racing low over a lagoon" loading="lazy" style="object-position: 50% 50%; filter: brightness(0.96) saturate(0.96) contrast(1.04)"></picture></div>
 <div class="av-ship-head"><div class="av-ship-titles"><p style="margin: 0; font-family: Tektur, Michroma, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #BC77FF">Atmospheric Sprinter · Our first official ship</p><h3 style="margin: 0; font-family: Michroma, sans-serif; font-weight: 400; font-size: calc(40px * var(--fs)); line-height: 1; letter-spacing: 0.04em; color: #FFFFFF">EKA</h3><p style="margin: 0; font-size: 16px; line-height: 1.6; color: #B8BBD6">Built by Avaru, start to finish.</p></div><span class="av-ship-toggle" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
 </summary>
 <div class="av-ship-body">
