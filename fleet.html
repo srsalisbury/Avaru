@@ -248,13 +248,27 @@ a[aria-label="Avaru Racing home"]:active img{transform:scale(.98)}
     };
   }
 
+  // while a ship above slides shut, scroll by the height it loses so the tapped ship stays put
+  function holdStill(d) {
+    var top = d.getBoundingClientRect().top, until = performance.now() + MS + 80;
+    function fix() {
+      var drift = d.getBoundingClientRect().top - top;
+      if (Math.abs(drift) >= 0.5) window.scrollBy({ top: drift, behavior: 'instant' });
+      if (performance.now() < until) requestAnimationFrame(fix);
+    }
+    return fix;
+  }
+
   ships.forEach(function (d) {
     d.querySelector('summary').addEventListener('click', function (e) {
       e.preventDefault();
       if (d._closing) return;
       if (d.open) { closeShip(d); return; }
+      var above = ships.some(function (o) { return o !== d && o.open && (o.compareDocumentPosition(d) & Node.DOCUMENT_POSITION_FOLLOWING); });
+      var fix = above && holdStill(d);
       ships.forEach(function (o) { if (o !== d) closeShip(o); });
       d.open = true;
+      if (fix) fix();
     });
   });
 
