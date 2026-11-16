@@ -45,15 +45,28 @@
     var ours = r.e.team === 'Avaru';
     var flag = r.e.flag ? '<img class="av-ev-flag" src="assets/flags/' + esc(r.e.flag) + '.svg" alt="' + esc(r.e.country || r.e.flag.toUpperCase()) + '" title="' + esc(r.e.country || '') + '" width="20" height="14">' : '';
     var who = '<span class="av-ev-who">' + esc(r.e.pilot) + flag + (ours ? '<img class="av-ev-emblem" src="assets/avaru-emblem.svg" alt="Avaru Racing" title="Avaru Racing" width="16" height="18">' : '') + '</span>';
+    // phones: best lap under the name, and a toggle that opens the full lap list
+    var hasLaps = r.laps.some(Boolean);
+    if (r.best != null) who += '<span class="av-ev-best">Best lap <b' + (!r.out && r.best === fastest ? ' class="av-fl-key"' : '') + '>' + fmt(r.best) + '</b></span>';
     var gap = (n === 0 || r.total == null || !lead) ? '—' : '+' + fmt(r.total - lead);
     var laps = r.laps.map(function (x, k) {
-      var col = 2 + k % 3, c = 'av-num av-lap' + (col === 4 ? ' av-end' : '') + (x && !r.out && x.v === fastest ? ' av-fl' : (x && !r.out && x.v === r.best ? ' av-pb' : ''));
-      return '<td class="' + c + '" style="grid-column:' + col + ';grid-row:' + (2 + Math.floor(k / 3)) + '" data-l="LAP ' + (k + 1) + '"><span>' + show(x) + '</span></td>';
+      var c = 'av-num av-lap' + (x && !r.out && x.v === fastest ? ' av-fl' : (x && !r.out && x.v === r.best ? ' av-pb' : ''));
+      return '<td class="' + c + '" data-l="Lap ' + (k + 1) + '"><span>' + show(x) + '</span></td>';
     }).join('');
-    return '<tr' + (ours ? ' class="av-ours"' : '') + '><td class="av-c-pos">' + pos + '</td><th scope="row" class="av-c-who">' + who + '</th>' + laps
+    var more = hasLaps ? '<td class="av-c-more"><button type="button" class="av-ev-more" aria-expanded="false" aria-label="Show lap times for ' + esc(r.e.pilot) + '"><svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td>' : '<td class="av-c-more"></td>';
+    return '<tr class="' + (ours ? 'av-ours' : '') + (hasLaps ? ' av-has-laps' : '') + '"><td class="av-c-pos">' + pos + '</td><th scope="row" class="av-c-who">' + who + '</th>' + laps
       + '<td class="av-num av-c-total"><span class="av-total' + (!r.out && r.total == null ? ' av-none' : '') + '">' + (r.out ? r.e.status : fmt(r.total)) + '</span>' + (n && r.total != null ? '<span class="av-gap-m">' + gap + '</span>' : '') + '</td>'
-      + '<td class="av-num av-c-gap av-gap">' + gap + '</td></tr>';
+      + '<td class="av-num av-c-gap av-gap">' + gap + '</td>' + more + '</tr>';
   }).join('');
+
+  // tapping a pilot on a phone opens or closes their lap times
+  var body = document.querySelector('[data-ev-rows]');
+  body.addEventListener('click', function (ev) {
+    var tr = ev.target.closest('tr.av-has-laps');
+    if (!tr || window.innerWidth > 720 || ev.target.closest('a')) return;
+    var open = tr.classList.toggle('av-open');
+    tr.querySelector('.av-ev-more').setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
 
   var win = rows[0], fl = null;
   rows.forEach(function (r) { if (!fl && !r.out && fastest != null && r.laps.some(function (x) { return x && x.v === fastest; })) fl = r; });
